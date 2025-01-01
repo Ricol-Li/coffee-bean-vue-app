@@ -1,34 +1,33 @@
-import pluginVue from 'eslint-plugin-vue'
-import vueTsEslintConfig from '@vue/eslint-config-typescript'
-import pluginVitest from '@vitest/eslint-plugin'
-import pluginCypress from 'eslint-plugin-cypress/flat'
-import skipFormatting from '@vue/eslint-config-prettier/skip-formatting'
+import globals from 'globals'
+import pluginJs from '@eslint/js' // 校验js规范的 （推荐）
+import tseslint from 'typescript-eslint' // 推荐的ts规范
+import pluginVue from 'eslint-plugin-vue' // 推荐的Vue的规范
+import prettierRecommended from 'eslint-plugin-prettier/recommended'
 
+/** @type {import('eslint').Linter.Config[]} */
 export default [
+  { files: ['**/*.{js,mjs,cjs,ts,vue}'] },
   {
-    name: 'app/files-to-lint',
-    files: ['**/*.{ts,mts,tsx,vue}'],
+    languageOptions: {
+      globals: {
+        ...globals.browser,
+        ...globals.node,
+      },
+    },
   },
-
-  {
-    name: 'app/files-to-ignore',
-    ignores: ['**/dist/**', '**/dist-ssr/**', '**/coverage/**'],
-  },
-
+  pluginJs.configs.recommended,
+  ...tseslint.configs.recommended,
   ...pluginVue.configs['flat/essential'],
-  ...vueTsEslintConfig(),
-  
   {
-    ...pluginVitest.configs.recommended,
-    files: ['src/**/__tests__/*'],
+    files: ['**/*.vue'], // 校验vue的ts代码
+    languageOptions: { parserOptions: { parser: tseslint.parser } },
   },
-  
   {
-    ...pluginCypress.configs.recommended,
-    files: [
-      'cypress/e2e/**/*.{cy,spec}.{js,ts,jsx,tsx}',
-      'cypress/support/**/*.{js,ts,jsx,tsx}'
-    ],
+    // 哪些文件不通过eslint校验
+    ignores: ['.css', '*.d.ts'],
+    // 添加自己的校验规则
+    rules: [],
   },
-  skipFormatting,
+  // prettier规则 覆盖eslint
+  prettierRecommended,
 ]
