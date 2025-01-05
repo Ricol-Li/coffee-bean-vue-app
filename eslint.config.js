@@ -23,10 +23,51 @@ export default [
     languageOptions: { parserOptions: { parser: tseslint.parser } },
   },
   {
-    // 哪些文件不通过eslint校验
-    ignores: ['.css', '*.d.ts'],
-    // 添加自己的校验规则
-    rules: [],
+    rules: {
+      // 强制组件内的命名约定
+      'vue/component-tags-order': [
+        'error',
+        {
+          order: ['script', 'template', 'style'],
+        },
+      ],
+
+      // 强制自闭合标签的使用，适用于 HTML、SVG 和 MathML 元素
+      'vue/html-self-closing': [
+        'error',
+        {
+          html: {
+            void: 'always', // HTML 空元素（如 <img>, <br>）必须自闭合
+            normal: 'never', // 普通 HTML 元素不允许自闭合
+            component: 'always', // Vue 组件必须自闭合
+          },
+          svg: 'always', // SVG 元素必须自闭合
+          math: 'always', // MathML 元素必须自闭合
+        },
+      ],
+      'vue/multi-word-component-names': 'off',
+      'vue/attributes-order': [
+        'error',
+        {
+          order: [
+            'DEFINITION',
+            'LIST_RENDERING',
+            'CONDITIONALS',
+            'RENDER_MODIFIERS',
+            'GLOBAL',
+            ['UNIQUE', 'SLOT'],
+            'TWO_WAY_BINDING',
+            'OTHER_DIRECTIVES',
+            'OTHER_ATTR',
+            'EVENTS',
+            'CONTENT',
+          ],
+          alphabetical: false,
+        },
+      ],
+      // template script 和 style 之间的空行
+      'vue/padding-line-between-blocks': ['error', 'always'],
+    },
   },
   // prettier规则 覆盖eslint
   prettierRecommended,
