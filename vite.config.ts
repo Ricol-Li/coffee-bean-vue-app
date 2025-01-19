@@ -25,7 +25,6 @@ export default defineConfig(({ mode }) => {
         eslintrc: {
           enabled: false, // 给eslint生成的配置，只需要一次
         },
-
       }),
       Components({
         // 自动导入 Element Plus 组件
@@ -47,8 +46,8 @@ export default defineConfig(({ mode }) => {
         scss: {
           api: 'modern',
           silenceDeprecations: ['import'],
-        }
-      }
+        },
+      },
     },
   }
 })
