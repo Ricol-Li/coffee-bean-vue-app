@@ -4,6 +4,11 @@ import tseslint from 'typescript-eslint' // 推荐的ts规范
 import pluginVue from 'eslint-plugin-vue' // 推荐的Vue的规范
 import prettierRecommended from 'eslint-plugin-prettier/recommended'
 
+import { createRequire } from 'node:module'
+const require = createRequire(import.meta.url)
+
+const autoImport = require('./.eslintrc-auto-import.json')
+
 /** @type {import('eslint').Linter.Config[]} */
 export default [
   { files: ['**/*.{js,mjs,cjs,ts,vue}'] },
@@ -12,6 +17,7 @@ export default [
       globals: {
         ...globals.browser,
         ...globals.node,
+        ...autoImport.globals,
       },
     },
   },

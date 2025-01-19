@@ -18,7 +18,7 @@
   @apply w-full h-full flex;
 
   .siderbar-container {
-    @apply w-[210px] bg-red;
+    @apply w-[var(--side-bar-width)] bg-red;
   }
 
   .main-container {
@@ -26,16 +26,16 @@
   }
 
   .nav-bar {
-    @apply w-full h-[50px] bg-yellow;
+    @apply w-full h-[var(--nav-bar-height)] bg-yellow;
   }
 
   .tags-view {
-    @apply w-full h-[34px] bg-blue;
+    @apply w-full h-[var(--tags-view-height)] bg-blue;
   }
 
   .app-main {
     @apply w-full bg-green;
-    min-height: calc(100vh - 84px);
+    min-height: calc(100vh - var(--nav-bar-height) - var(--tags-view-height));
   }
 }
 </style>

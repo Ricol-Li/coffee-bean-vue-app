@@ -1,0 +1,7 @@
+@import './variables.module.scss';
+
+:root {
+  --side-bar-width: #{$sideBarWidth};
+  --nav-bar-height: #{$navBarHeight};
+  --tags-view-height: #{$tagsViewHeight};
+}
