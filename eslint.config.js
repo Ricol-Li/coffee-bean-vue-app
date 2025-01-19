@@ -22,6 +22,8 @@ export default [
     files: ['**/*.vue'], // 校验vue的ts代码
     languageOptions: { parserOptions: { parser: tseslint.parser } },
   },
+  // prettier规则 覆盖eslint
+  prettierRecommended,
   {
     rules: {
       // 强制组件内的命名约定
@@ -69,6 +71,4 @@ export default [
       'vue/padding-line-between-blocks': ['error', 'always'],
     },
   },
-  // prettier规则 覆盖eslint
-  prettierRecommended,
 ]
