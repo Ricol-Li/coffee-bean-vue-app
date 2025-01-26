@@ -4,10 +4,12 @@ import { defineConfig, loadEnv } from 'vite'
 import AutoImport from 'unplugin-auto-import/vite'
 import Components from 'unplugin-vue-components/vite'
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
+import ElementPlus from 'unplugin-element-plus/vite'
 
 import vue from '@vitejs/plugin-vue'
 import path from 'node:path'
 import UnoCSS from 'unocss/vite'
+
 // https://vite.dev/config/
 export default defineConfig(({ mode }) => {
   // 加载环境变量
@@ -18,6 +20,7 @@ export default defineConfig(({ mode }) => {
     plugins: [
       vue(),
       UnoCSS(),
+      ElementPlus({}),
       AutoImport({
         imports: ['vue', 'vue-router', 'pinia'],
         // 自动导入 Element Plus 相关函数，如：ElMessage, ElMessageBox... (带样式)
@@ -41,11 +44,14 @@ export default defineConfig(({ mode }) => {
         },
       ],
     },
-    css: {
-      preprocessorOptions: {
-        scss: {
-          api: 'modern',
-          silenceDeprecations: ['import'],
+    server: {
+      host: '0.0.0.0',
+      port: 9000,
+      proxy: {
+        '/api': {
+          target: '',
+          changeOrigin: true,
+          rewrite: path => path.replace(/^\/api/, ''),
         },
       },
     },

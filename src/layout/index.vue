@@ -1,6 +1,8 @@
 <template>
   <div class="app-wrapper">
-    <div class="siderbar-container">侧边导航</div>
+    <div class="siderbar-container">
+      <SideBar />
+    </div>
     <div class="main-container">
       <div class="header">
         <div class="nav-bar">导航条-1</div>
