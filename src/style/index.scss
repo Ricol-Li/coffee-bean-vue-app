@@ -1,7 +1,0 @@
-@use './variables.module.scss' as *;
-
-:root {
-  --side-bar-width: #{$sideBarWidth};
-  --nav-bar-height: #{$navBarHeight};
-  --tags-view-height: #{$tagsViewHeight};
-}

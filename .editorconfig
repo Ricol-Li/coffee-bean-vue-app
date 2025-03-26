@@ -1,13 +1,18 @@
-# 指明这是最顶层的 EditorConfig 文件，任何更高层的 EditorConfig 文件都将被忽略
-root=true
+root = true
 
 [*]
 charset=utf-8
+end_of_line=lf
+insert_final_newline=true
 indent_style=space
 indent_size=2
-# 指定换行符为 LF（Unix 样式），而不是 CRLF（Windows 样式）。
-end_of_line=lf
-# 确保每个文件的最后一行有一个换行符
-insert_final_newline=true
-# 移除行尾的空白字符
-trim_trailing_whitespace=true
+max_line_length = 100
+trim_trailing_whitespace = true
+quote_type = single
+
+[*.{yml,yaml,json}]
+indent_style = space
+indent_size = 2
+
+[*.md]
+trim_trailing_whitespace = false

@@ -18,13 +18,16 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: '18.x'
+          node-version: '20.14.x'
+
+      - name: Install pnpm
+        run: npm install -g pnpm
 
       - name: Install dependencies
-        run: npm install
+        run: pnpm install
 
       - name: Build
-        run: npm run build
+        run: pnpm run build:play
 
       - name: Deploy to Nginx Server
         env:
@@ -39,4 +42,4 @@ jobs:
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan $ALIYUN_SERVER_IP >> ~/.ssh/known_hosts
           #scp -r ./dist/* $ALIYUN_SERVER_USER@$ALIYUN_SERVER_IP:$REMOTE_PATH
-          sshpass -p $ALIYUN_SERVER_PASSWORD scp -r ./dist/* root@$ALIYUN_SERVER_IP:$REMOTE_PATH
+          sshpass -p $ALIYUN_SERVER_PASSWORD scp -r ./playground/dist/* root@$ALIYUN_SERVER_IP:$REMOTE_PATH
